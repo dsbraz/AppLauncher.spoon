@@ -4,10 +4,19 @@ Personal Hammerspoon Spoon that launches or focuses applications by semantic
 role. Roles keep the keyboard map stable when the application used for a job
 changes.
 
+For a running application, the first shortcut press prefers its most recently
+focused window in the current Space. If the application is already frontmost,
+subsequent presses cycle through its actual windows in focus order, including
+windows in other Spaces. Cross-Space focus is reasserted until the transition
+settles. Applications that are not running are launched by bundle ID.
+
+The cycle covers standard, non-minimized windows. Application tabs are not
+separate windows and therefore are not part of it.
+
 ## Configuration
 
 ```lua
-local hyper = { "cmd", "ctrl", "alt", "shift" }
+local hyper = { "cmd", "ctrl", "alt" }
 
 hs.loadSpoon("AppLauncher")
 
