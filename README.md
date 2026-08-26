@@ -27,6 +27,7 @@ spoon.AppLauncher.apps = {
   git = "com.gitbutler.app",
   ide = "com.jetbrains.rider",
   terminal = "com.mitchellh.ghostty",
+  x = "com.google.Chrome.app.lodlkdfmihgonocnmddehnfgiljnadcf",
 }
 
 spoon.AppLauncher.newWindowMenuItems = {
@@ -40,6 +41,7 @@ spoon.AppLauncher:bindHotkeys({
   git = { hyper, "g" },
   ide = { hyper, "i" },
   terminal = { hyper, "t" },
+  x = { hyper, "x" },
 })
 
 spoon.AppLauncher:bindNewWindow({
