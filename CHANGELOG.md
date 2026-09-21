@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.0 - 2026-09-21
+
+- Remove Stage Manager integration and its configuration options.
+- Preserve application launching, window cycling across Spaces, and new-window shortcuts.
+
 ## 0.8.0 - 2026-08-24
 
 - Optionally join newly opened windows to the current Stage Manager group.

@@ -33,7 +33,6 @@ spoon.AppLauncher.apps = {
 spoon.AppLauncher.newWindowMenuItems = {
   files = { "File", "New Finder Window" },
 }
-spoon.AppLauncher.joinNewWindowsToCurrentStage = true
 
 spoon.AppLauncher:bindHotkeys({
   browser = { hyper, "b" },
@@ -83,17 +82,6 @@ on the current Space. Focus is then handed to that one window once it exists --
 never to the application -- and a window that landed on another Space anyway is
 left alone rather than dragged into view.
 
-When `joinNewWindowsToCurrentStage` is enabled and Stage Manager is active, the
-Spoon remembers the current stage before opening the window. It then invokes
-WindowManager's private `AXAddToStage` Accessibility action until the windows
-from the previous stage and the new window belong to the same group. Group
-snapshots must agree twice before the Spoon acts. The original stage is anchored
-by checking the same focused window twice, independently of WindowManager's
-occasionally stale group list. If WindowManager returns unstable or unavailable
-data, the new window still opens with the normal behavior. The option defaults
-to `false` because the action is undocumented and may change between macOS
-releases.
-
 ## Public API
 
 - `launch(role)` launches or focuses the configured application.
@@ -107,5 +95,4 @@ releases.
 ## Requirements
 
 - Hammerspoon 1.1.1 or newer
-- Accessibility permission for Hammerspoon. Stage Manager grouping additionally
-  depends on the private Accessibility tree of `com.apple.WindowManager`.
+- Accessibility permission for Hammerspoon.
