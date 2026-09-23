@@ -9,6 +9,10 @@ obj.license = "MIT"
 obj.apps = {}
 obj.newWindowMenuItem = { "File", "New Window" }
 obj.newWindowMenuItems = {}
+obj.newWindowHotkeys = {
+  chrome = { { "cmd", "ctrl", "alt" }, "space" },
+  terminal = { { "cmd", "ctrl", "alt" }, "return" },
+}
 obj.newWindowFocusTimeout = 1.5
 obj.newWindowFocusPoll = 0.05
 obj.launchFocusTimeout = 1.5
@@ -365,7 +369,7 @@ end
 -- role key that reached the global binding instead of the mode's own left the
 -- mode entered forever and the prefix dead until a reload.
 function obj:bindNewWindow(mapping)
-  return self:_bind("_newWindowHotkeys", mapping, "launchNewWindow")
+  return self:_bind("_newWindowHotkeys", mapping or self.newWindowHotkeys, "launchNewWindow")
 end
 
 local function sortedRoles(hotkeys)

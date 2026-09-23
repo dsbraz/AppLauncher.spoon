@@ -53,6 +53,11 @@ spoon.AppLauncher:bindNewWindow({
 `bindNewWindow` takes the same role-to-hotkey shape as `bindHotkeys`, and binds
 plain hotkeys: one key, one window.
 
+Calling `bindNewWindow()` without a mapping uses the Spoon's `newWindowHotkeys`:
+Hyper+Space for the `chrome` role and Hyper+Return for `terminal`, where Hyper
+is Command+Control+Option. Configure those roles in `apps` before calling it.
+An explicit mapping still overrides these defaults; `{}` disables the bindings.
+
 A prefix mode was tried first — one key arming a mode, the role letter of the
 focus shortcut choosing the application — and it had a failure mode with no way
 back. Entering the mode disables the prefix key by design, and `hs.hotkey` only
