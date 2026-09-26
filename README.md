@@ -44,7 +44,7 @@ spoon.AppLauncher:bindHotkeys({
 })
 
 spoon.AppLauncher:bindNewWindow({
-  browser = { hyper, "space" },
+  browser = { { "cmd", "ctrl", "alt", "shift" }, "return" },
   files = { hyper, "escape" },
   terminal = { hyper, "return" },
 })
@@ -54,7 +54,7 @@ spoon.AppLauncher:bindNewWindow({
 plain hotkeys: one key, one window.
 
 Calling `bindNewWindow()` without a mapping uses the Spoon's `newWindowHotkeys`:
-Hyper+Space for the `chrome` role and Hyper+Return for `terminal`, where Hyper
+Hyper+Shift+Return for the `chrome` role and Hyper+Return for `terminal`, where Hyper
 is Command+Control+Option. Configure those roles in `apps` before calling it.
 An explicit mapping still overrides these defaults; `{}` disables the bindings.
 

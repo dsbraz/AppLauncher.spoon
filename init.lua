@@ -10,7 +10,7 @@ obj.apps = {}
 obj.newWindowMenuItem = { "File", "New Window" }
 obj.newWindowMenuItems = {}
 obj.newWindowHotkeys = {
-  chrome = { { "cmd", "ctrl", "alt" }, "space" },
+  chrome = { { "cmd", "ctrl", "alt", "shift" }, "return" },
   terminal = { { "cmd", "ctrl", "alt" }, "return" },
 }
 obj.newWindowFocusTimeout = 1.5
