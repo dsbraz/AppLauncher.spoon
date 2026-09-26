@@ -85,6 +85,9 @@ function obj:_startWindowFilter(role, bundleID, app)
 end
 
 function obj:_startWindowFilters(mapping)
+  -- After a reload, windows on other Spaces are unknown until those Spaces
+  -- are visited. Discover them on entry without requiring a window click.
+  hs.window.filter.forceRefreshOnSpaceChange = true
   self:_clearWindowFilters()
 
   for role in pairs(mapping or {}) do
@@ -193,7 +196,17 @@ end
 
 function obj:_focusOrCycle(role, app)
   local windows = self:_trackedWindows(role, app)
-  if #windows == 0 then return self:_focusRunningApp(role, app) end
+  if #windows == 0 then
+    -- Minimized windows are excluded from cycling. Restore one when the app
+    -- has no available window instead of activating it with nothing to show.
+    for _, window in ipairs(app:allWindows()) do
+      if window:isStandard() and window:isMinimized() then
+        window:unminimize()
+        return self:_focusTrackedWindow(role, app, window)
+      end
+    end
+    return self:_focusRunningApp(role, app)
+  end
 
   local focused = hs.window.focusedWindow()
   local focusedID = focused and focused:id()
@@ -232,7 +245,11 @@ function obj:launch(role)
   end
 
   local app = hs.application.applicationsForBundleID(bundleID)[1]
-  if app then return self:_focusOrCycle(role, app) end
+  if app then
+    -- Focusing a window alone does not restore an application hidden with Cmd+H.
+    if app:isHidden() then app:unhide() end
+    return self:_focusOrCycle(role, app)
+  end
 
   if hs.application.launchOrFocusByBundleID(bundleID) then return true end
 

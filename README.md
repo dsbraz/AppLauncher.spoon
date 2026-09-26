@@ -13,6 +13,10 @@ settles. Applications that are not running are launched by bundle ID.
 The cycle covers standard, non-minimized windows. Application tabs are not
 separate windows and therefore are not part of it.
 
+After a Hammerspoon reload, macOS only exposes windows in the current Space.
+AppLauncher refreshes window tracking when you visit another Space, so its
+windows rejoin the cycle without needing to click each one.
+
 ## Configuration
 
 ```lua
