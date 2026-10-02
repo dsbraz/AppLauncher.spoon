@@ -10,6 +10,11 @@ subsequent presses cycle through its actual windows in focus order, including
 windows in other Spaces. Cross-Space focus is reasserted until the transition
 settles. Applications that are not running are launched by bundle ID.
 
+Hidden applications are unhidden, and a minimized window is restored when no
+other window is available. If the application is running with no windows after
+the last one was closed, the shortcut asks macOS to reopen it, then focuses the
+window it creates.
+
 The cycle covers standard, non-minimized windows. Application tabs are not
 separate windows and therefore are not part of it.
 

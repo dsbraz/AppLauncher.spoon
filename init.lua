@@ -197,12 +197,21 @@ end
 function obj:_focusOrCycle(role, app)
   local windows = self:_trackedWindows(role, app)
   if #windows == 0 then
+    local appWindows = app:allWindows()
     -- Minimized windows are excluded from cycling. Restore one when the app
     -- has no available window instead of activating it with nothing to show.
-    for _, window in ipairs(app:allWindows()) do
+    for _, window in ipairs(appWindows) do
       if window:isStandard() and window:isMinimized() then
         window:unminimize()
         return self:_focusTrackedWindow(role, app, window)
+      end
+    end
+    -- Activation alone does not reopen a window after the last one is closed.
+    -- Ask macOS to reopen the running app, as clicking its Dock icon would.
+    if #appWindows == 0 then
+      if not hs.application.launchOrFocusByBundleID(app:bundleID()) then
+        self.logger.e("Could not reopen application for role: " .. tostring(role))
+        return false
       end
     end
     return self:_focusRunningApp(role, app)
